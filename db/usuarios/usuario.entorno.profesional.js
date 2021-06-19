@@ -23,7 +23,7 @@ let relacion1 = {
     foreignKey: {
         name: 'id_usuario',
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
     },
     onDelete: 'CASCADE'
 }

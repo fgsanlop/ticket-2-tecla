@@ -15,7 +15,7 @@ app.use((err, req, res, next) => { //Errores generales
     if (err) {
         console.log(err);
         if (!res.headersSent) {
-            res.status(500).send("Error en el servidor: " + err.message)
+            res.status(500).send("Error en el servidor: " + err)
         }
     }
     next();
@@ -25,8 +25,6 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/templates');
 
-
-
 const iniciarServidor = async () => {
     try {
         await sequelize.authenticate();
@@ -35,7 +33,7 @@ const iniciarServidor = async () => {
             console.log(`*** Servidor en http://${process.env.HOST}:${process.env.PORT} ***`)
         })
     } catch (error) {
-        console.log(`Error de conexión: ${error.message}`);
+        console.log(error);
     }
 }
 
