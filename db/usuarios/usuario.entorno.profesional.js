@@ -13,7 +13,7 @@ const UsuarioEntornoProfesional = sequelize.define('usuario_entornos_profesional
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-            min: 1,
+            min: 0,
             max: 5
         }
     },

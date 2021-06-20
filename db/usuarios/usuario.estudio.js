@@ -20,6 +20,14 @@ const Estudio = sequelize.define('usuario_estudios', {
         type: DataTypes.STRING(300),
         allowNull: false,
     },
+    año: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            min: 1900,
+            max: new Date().getFullYear()
+        }
+    }
 }, { createdAt: false });
 
 let relacion = {

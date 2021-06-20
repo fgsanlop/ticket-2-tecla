@@ -30,7 +30,7 @@ module.exports = sincronizarTablas = async () => {
         alter: true
     }
     // //Usuarios
-    // await Usuario.sync(opciones);
+    // await Usuario.sync(opciones);    
     // await Amistad.sync(opciones);
     // await UsuarioConocimiento.sync(opciones);
     // await UsuarioConocimientoExtra.sync(opciones);

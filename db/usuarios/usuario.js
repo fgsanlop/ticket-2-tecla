@@ -40,8 +40,8 @@ const Usuario = sequelize.define('usuarios', {
         allowNull: false,
     },
     fecha_nacimiento: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
+        type: DataTypes.STRING(10), //Use DATEONLY pero por alguna razon me guardaba las fechas con un dia anterior, cuando consultaba los datos eran 2 dias anteriores a lo registrado
+        allowNull: false, //Validare la fecha con JOI para que no haya dias 32 o mes 13 
     },
     linkedin: {
         type: DataTypes.STRING(200),
@@ -54,7 +54,25 @@ const Usuario = sequelize.define('usuarios', {
     es_tutor: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+
     },
 });
+
+Usuario.findOrCreate({
+    where: {
+        nombre_usuario: 'aeolguin',
+        pass: 'pirulo',
+        imagen_perfil: 'aeolguin.png',
+        nombres: 'Ariel',
+        apellidos: 'Olguin',
+        pais: 'Argentina',
+        ciudad: 'Buenos Aires',
+        fecha_nacimiento: '1980-01-01',
+        linkedin: 'https://www.linkedin.com/in/ariel-olguin-83093316/',
+        github: 'https://github.com/aeolguin',
+        es_tutor: true   
+    }
+});
+
 
 module.exports = Usuario;
