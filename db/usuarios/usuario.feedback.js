@@ -20,6 +20,7 @@ let relacion1 = {
         type: Sequelize.INTEGER,
         allowNull: false        
     },
+    as: 'emisor_feedback',
     onDelete: 'CASCADE'
 };
 

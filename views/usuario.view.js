@@ -88,7 +88,7 @@ router.get('/tutor/logout', middJwt.headerViewTutor, middJwt.checarTokenTutor, a
 });
 
 //IMAGENES
-router.post('/imagen', connectMultipartyMidd.connectMultipartyMiddUsuarios, usuarioImgController.subirImagenUsuario);
+router.post('/imagen', middJwt.checarToken, connectMultipartyMidd.connectMultipartyMiddUsuarios, usuarioImgController.subirImagenUsuario);
 router.get('/imagen/:imagen', usuarioImgController.verImagen);
 
 

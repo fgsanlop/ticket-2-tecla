@@ -6,8 +6,6 @@ const Desempeno = require('../db/tecla/desempeno');
 const UsuarioDesempeno = require('../db/usuarios/usuario.desempeno');
 const HabilidadBlanda = require('../db/tecla/habilidad.blanda');
 const UsuarioHabilidadBlanda = require('../db/usuarios/usuario.habilidad.blanda');
-const EntornoProfesional = require('../db/tecla/entorno.profesional');
-const UsuarioEntornoProfesional = require('../db/usuarios/usuario.entorno.profesional');
 
 //const UsuarioModel = require('./usuario.model');
 

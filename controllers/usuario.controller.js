@@ -3,8 +3,7 @@ const UsarioModel = require('../models/usuario.model');
 
 const generarToken = async (datos) => {
     try {
-        let tokenSign = jwt.sign({datos}, process.env.SECRET_KEY)
-        return tokenSign
+        return jwt.sign({datos}, process.env.SECRET_KEY);
     }catch (error){
         throw error
     }
@@ -14,17 +13,15 @@ const registrarUsuario = async (datos) => {
     const { nombre_usuario, pass, nombres, apellidos, pais, ciudad, fecha_nacimiento, linkedin, github } = datos;
     let nuevoUsuario = new UsarioModel(nombre_usuario, pass, nombres, apellidos, pais, ciudad, fecha_nacimiento, linkedin, github);    
     try {
-        let resultado = await nuevoUsuario.registrarUsuario();
-        return resultado;
+        return await nuevoUsuario.registrarUsuario();
     } catch (error) {
         throw error;
     }    
 }
 
 const obtenerDatos = async (nombreUsuario) => {        
-    try {
-        let usuario = UsarioModel.obtenerDatos(nombreUsuario);
-        return usuario;
+    try { 
+        return await UsarioModel.obtenerDatos(nombreUsuario);
     } catch (error) {
         throw error;
     }    
@@ -35,14 +32,10 @@ const iniciarSesion = async (datos) => {
     let loginUsuario = new UsarioModel(nombre_usuario, pass);
     let comprobarCredenciales = await loginUsuario.comprobarCredenciales(false);
     try {
-        if(comprobarCredenciales !== false) {
-            console.log(comprobarCredenciales);
-            let token = await generarToken(comprobarCredenciales);            
-            return token;
-        }
-        else {
-            throw new Error('Credenciales incorrectas');
-        }
+        if(comprobarCredenciales !== false) 
+            return await generarToken(comprobarCredenciales);        
+        else 
+            throw new Error('Credenciales incorrectas');        
     } catch (error) {
         throw error;
     }
@@ -53,14 +46,10 @@ const iniciarSesionTutor = async (datos) => {
     let loginUsuario = new UsarioModel(nombre_usuario, pass);
     let comprobarCredenciales = await loginUsuario.comprobarCredenciales(true);
     try {
-        if(comprobarCredenciales !== false) {
-            console.log(comprobarCredenciales);
-            let token = await generarToken(comprobarCredenciales);            
-            return token;
-        }
-        else {
-            throw new Error('Credenciales incorrectas');
-        }
+        if(comprobarCredenciales !== false) 
+            return await generarToken(comprobarCredenciales);        
+        else 
+            throw new Error('Credenciales incorrectas');        
     } catch (error) {
         throw error;
     }
@@ -70,8 +59,7 @@ const modificarUsuario = async (id, datos) => {
     const { pass, nombres, apellidos, pais, ciudad, fecha_nacimiento, linkedin, github, new_pass } = datos;  
     let modUsuario = new UsarioModel('', pass, nombres, apellidos, pais, ciudad, fecha_nacimiento, linkedin, github);
     try {        
-        let resultado = await modUsuario.modificarUsuario(id, new_pass);
-        return resultado;
+        return await modUsuario.modificarUsuario(id, new_pass);;
     } catch (error) {
         throw error;
     }
@@ -79,9 +67,8 @@ const modificarUsuario = async (id, datos) => {
 
 const eliminarUsuario = async (id, pass) => {  
     try {                
-        let usuarioAEliminar = new UsarioModel('', pass);
-        let resultado = await usuarioAEliminar.eliminarUsuario(id);
-        return resultado;
+        let usuarioAEliminar = new UsarioModel('', pass);        
+        return await usuarioAEliminar.eliminarUsuario(id);;
     } catch (error) {
         throw error;
     }

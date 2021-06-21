@@ -20,6 +20,7 @@ let relacion1 = {
         type: Sequelize.INTEGER,
         allowNull: false        
     },
+    as: 'emisor',
     onDelete: 'CASCADE'
 };
 
@@ -29,6 +30,7 @@ let relacion2 = {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+    as: 'receptor',
     onDelete: 'CASCADE'
 }
 

@@ -29,7 +29,7 @@ module.exports = class UsuarioModel {
     }
     //C
     registrarUsuario = async () => {
-        let existeUsuario = await this.checarExistenciaUsuario();
+        let existeUsuario = await this.checarExistenciaNombreUsuario();
         if(existeUsuario)
             throw new Error('Usuario ya ha sido registrado');
         else {
@@ -44,7 +44,7 @@ module.exports = class UsuarioModel {
                     fecha_nacimiento: this.fechaNacimiento,
                     linkedin: this.linkedin,
                     github: this.github,
-                    imagen_perfil: 'default.png',
+                    imagen_perfil: 'noImagen',
                     es_tutor: false
                 });      
                 
@@ -122,8 +122,8 @@ module.exports = class UsuarioModel {
                     'imagen_perfil'
                 ],
                 include: [
-                    { model: Estudio, attributes: ['tipo', 'titulo', 'descripcion', 'año'] },
-                    { model: Idioma, attributes: ['idioma', 'porcentaje'] },
+                    { model: Estudio, attributes: ['id', 'tipo', 'titulo', 'descripcion', 'año'] },
+                    { model: Idioma, attributes: ['id', 'idioma', 'porcentaje'] },
                     { 
                         model: UsuarioConocimiento, 
                         attributes: ['id', 'puntuacion', 'updatedAt'],
@@ -145,14 +145,15 @@ module.exports = class UsuarioModel {
                         include: { model: HabilidadBlanda, attributes: ['nombre'] } 
                     },
                     {
-                        model: UsuarioEntornoProfesional, 
+                        model: UsuarioEntornoProfesional,                         
                         attributes: ['id', 'puntuacion', 'updatedAt'],
                         include: { model: EntornoProfesional, attributes: ['nombre'] } 
                     },
                     {
                         model: UsuarioFeedback,
                         foreignKey: 'id_usuario_receptor',
-                        attributes: ['id_usuario_emisor', 'comentario', 'createdAt', 'updatedAt'],                                           
+                        attributes: ['id_usuario_emisor', 'comentario', 'createdAt', 'updatedAt'],  
+                        include: { model: Usuario, as:'emisor_feedback', attributes: ['id', 'nombre_usuario', 'nombres', 'apellidos'] }                                          
                     }
                 ]
             });
@@ -164,7 +165,7 @@ module.exports = class UsuarioModel {
             throw error;
         }
     } 
-    checarExistenciaUsuario = async () => {
+    checarExistenciaNombreUsuario = async () => {
         let existeUsuario = await Usuario.findOne({
             where: {nombre_usuario: this.nombreUsuario} 
         });
@@ -234,9 +235,35 @@ module.exports = class UsuarioModel {
         }
     }
 
-
-
     /////////////////////////////////////////////////////////////////////////////////
     
+    static actualizarImagen = async (id, imagen) => {
+        try {
+            let usuario = await Usuario.findOne({where: { id: id }});
+            if(usuario == null)
+                throw new Error();
+            usuario.imagen_perfil = imagen;
+            await usuario.save();
+            return 'Imagen actualizada';
+        } catch (error) {
+            throw new Error('Error al actualizar imagen');
+        }
+    }
+
+    static obtenerNombreImagen = async (id) => {
+        try {
+            let usuario = await Usuario.findOne(
+                {
+                    where: { id: id },
+                    attributes: ['imagen_perfil']
+                }
+            );
+            if(usuario == null)
+                throw new Error();
+            return usuario.imagen_perfil;
+        } catch (error) {
+            throw new Error('Error al obtener nombre de imagen');
+        }
+    }
 
 }

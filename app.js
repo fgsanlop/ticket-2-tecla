@@ -8,6 +8,12 @@ const sincronizarTablas = require('./db/sync');
 //Vistas
 const usuarioView = require('./views/usuario.view');
 const tutorView = require('./views/tutor.view');
+const usuarioIdiomaView = require('./views/usuario.idioma.view');
+const usuarioEstudioView = require('./views/usuario.estudio.view');
+const usuarioConocimientoExtraView = require('./views/usuario.conocimiento.extra.view');
+const usuarioEntornoProfesionalView = require('./views/usuario.entorno.profesional.view');
+const usuarioFeedbackView = require('./views/usuario.feedback.view');
+const usuarioAmistadView = require('./views/usuario.amistad.view');
 
 //Middlewares
 app.use(express.json());
@@ -29,8 +35,14 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/templates');
 
 //Views
-app.use('/api/usuario/', usuarioView);
 app.use('/api/tutor/', tutorView);
+app.use('/api/usuario/', usuarioView);
+app.use('/api/usuario/idioma/', usuarioIdiomaView);
+app.use('/api/usuario/estudio/', usuarioEstudioView);
+app.use('/api/usuario/conocimiento-extra/', usuarioConocimientoExtraView);
+app.use('/api/usuario/entorno-profesional/', usuarioEntornoProfesionalView);
+app.use('/api/usuario/feedback/', usuarioFeedbackView);
+app.use('/api/usuario/amigos/', usuarioAmistadView);
 
 const iniciarServidor = async () => {
     try {
