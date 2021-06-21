@@ -1,10 +1,11 @@
 const express = require('express');
 const usuarioConocimientoExtraController = require('../controllers/usuario.conocimiento.extra.controller');
 const middJwt = require('../middlewares/midd.jwt');
+const middValidUsuarioDatosAdicionales = require('../middlewares/midd.validation.usuario.datos.adicionales');
 
 const router = express.Router();
 
-router.post('/registro', middJwt.checarToken, async (req, res) => {
+router.post('/registro', middJwt.checarToken, middValidUsuarioDatosAdicionales.conocimientoExtra, async (req, res) => {
     const body = req.body;   
     const token = req.headers.authorization.split(' ')[1];  
     try {
@@ -16,7 +17,7 @@ router.post('/registro', middJwt.checarToken, async (req, res) => {
     }
 });
 
-router.put('/actualizar/:idConocimientoExtra', middJwt.checarToken, async (req,res) => {    
+router.put('/actualizar/:idConocimientoExtra', middJwt.checarToken, middValidUsuarioDatosAdicionales.conocimientoExtra, async (req,res) => {    
     const body = req.body;
     const token = req.headers.authorization.split(' ')[1];                
     try {

@@ -1,10 +1,11 @@
 const express = require('express');
 const usuarioEntornoProfesionalController = require('../controllers/usuario.entorno.profesional.controller');
 const middJwt = require('../middlewares/midd.jwt');
+const middValidUsuarioDatosAdicionales = require('../middlewares/midd.validation.usuario.datos.adicionales');
 
 const router = express.Router();
 
-router.post('/calificar', middJwt.checarToken, async (req, res) => {
+router.post('/calificar', middJwt.checarToken, middValidUsuarioDatosAdicionales.entornoProfesional, async (req, res) => {
     /*{puntuaciones: []}*/
     let body = req.body;
     const token = req.headers.authorization.split(' ')[1]; 

@@ -3,10 +3,11 @@ const usuarioController = require('../controllers/usuario.controller');
 const usuarioImgController = require('../controllers/usuario.img.controller');
 const connectMultipartyMidd = require('../middlewares/midd.connect.multiparty');
 const middJwt = require('../middlewares/midd.jwt');
+const middValidUsuario = require('../middlewares/midd.validation.usuario');
 
 const router = express.Router();
 
-router.post('/registro', async (req, res) => {
+router.post('/registro', middValidUsuario.registro, async (req, res) => {
     let body = req.body;   
     try {
         let resultado = await usuarioController.registrarUsuario(body);
@@ -16,7 +17,7 @@ router.post('/registro', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', middValidUsuario.login, async (req, res) => {
     let body = req.body;    
     let recordar = req.body.recordar;
     try {
@@ -30,7 +31,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/tutor/login', async (req, res) => {
+router.post('/tutor/login', middValidUsuario.login, async (req, res) => {
     let body = req.body;    
     let recordar = req.body.recordar;
     try {
@@ -53,7 +54,7 @@ router.get('/:nombreUsuario', async (req, res) => {
     }    
 });
 
-router.put('/actualizar', middJwt.checarToken, async (req,res) => {    
+router.put('/actualizar', middJwt.checarToken, middValidUsuario.actualizar, async (req,res) => {    
     let body = req.body;
     const token = req.headers.authorization.split(' ')[1];                
     try {
@@ -65,7 +66,7 @@ router.put('/actualizar', middJwt.checarToken, async (req,res) => {
     }
 });
 
-router.delete('/eliminar', middJwt.checarToken, async (req,res) => {    
+router.delete('/eliminar', middJwt.checarToken, middValidUsuario.eliminar, async (req,res) => {    
     const token = req.headers.authorization.split(' ')[1];                
     try {        
         const datos = await middJwt.decodificarToken(token);

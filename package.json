@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/fgsanlop/ticket-2-tecla#readme",
   "dependencies": {
+    "@hapi/joi-date": "^2.0.1",
     "connect-multiparty": "^2.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

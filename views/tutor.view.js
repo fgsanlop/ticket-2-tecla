@@ -1,10 +1,11 @@
 const express = require('express');
 const tutorController = require('../controllers/tutor.controller');
 const middJwt = require('../middlewares/midd.jwt');
+const middValidTutor = require('../middlewares/midd.validation.tutor');
 
 const router = express.Router();
 
-router.post('/calificar/conocimientos', middJwt.checarTokenTutor, async (req, res) => {
+router.post('/calificar/conocimientos', middJwt.checarTokenTutor, middValidTutor.puntuar, async (req, res) => {
     /*{idUsuario:0, puntuaciones: []}*/
     let body = req.body;
     try {
@@ -15,7 +16,7 @@ router.post('/calificar/conocimientos', middJwt.checarTokenTutor, async (req, re
     }
 });
 
-router.post('/calificar/tecnologias', middJwt.checarTokenTutor, async (req, res) => {    
+router.post('/calificar/tecnologias', middJwt.checarTokenTutor, middValidTutor.puntuar, async (req, res) => {    
     let body = req.body;
     try {
         let resultado = await tutorController.calificarTecnologias(body.id_usuario, body.puntuaciones);
@@ -25,7 +26,7 @@ router.post('/calificar/tecnologias', middJwt.checarTokenTutor, async (req, res)
     }
 });
 
-router.post('/calificar/desempenos', middJwt.checarTokenTutor, async (req, res) => {    
+router.post('/calificar/desempenos', middJwt.checarTokenTutor, middValidTutor.puntuar, async (req, res) => {    
     let body = req.body;
     try {
         let resultado = await tutorController.calificarDesempeños(body.id_usuario, body.puntuaciones);
@@ -35,7 +36,7 @@ router.post('/calificar/desempenos', middJwt.checarTokenTutor, async (req, res) 
     }
 });
 
-router.post('/calificar/habilidades-blandas', middJwt.checarTokenTutor, async (req, res) => {    
+router.post('/calificar/habilidades-blandas', middJwt.checarTokenTutor, middValidTutor.puntuar, async (req, res) => {    
     let body = req.body;
     try {
         let resultado = await tutorController.calificarHabilidadesBlandas(body.id_usuario, body.puntuaciones);
