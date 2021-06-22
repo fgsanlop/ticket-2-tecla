@@ -13,8 +13,4 @@ const Desempeño = sequelize.define('desempeños', {
     },
 }, { timestamps: false });
 
-Desempeño.findOrCreate({ where: { nombre: 'Calidad del código' } });
-Desempeño.findOrCreate({ where: { nombre: 'Velocidad de entrega' } });
-Desempeño.findOrCreate({ where: { nombre: 'Performance del código' } });
-
 module.exports = Desempeño;

@@ -13,9 +13,4 @@ const EntornoProfesional = sequelize.define('entornos_profesionales', {
     },
 }, { timestamps: false });
 
-EntornoProfesional.findOrCreate({ where: { nombre: 'Versionado - Git/GitHub' } });
-EntornoProfesional.findOrCreate({ where: { nombre: 'Trello - Jira' } });
-EntornoProfesional.findOrCreate({ where: { nombre: 'Slack' } });
-EntornoProfesional.findOrCreate({ where: { nombre: 'Metodologías Ágiles' } });
-
 module.exports = EntornoProfesional;

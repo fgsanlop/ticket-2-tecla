@@ -4,7 +4,6 @@ const middGeneral = require('./middlewares/midd.general');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const sequelize = require('./db/conn');
-const sincronizarTablas = require('./db/sync');
 //Vistas
 const usuarioView = require('./views/usuario.view');
 const tutorView = require('./views/tutor.view');
@@ -47,7 +46,7 @@ app.use('/api/usuario/amigos/', usuarioAmistadView);
 const iniciarServidor = async () => {
     try {
         await sequelize.authenticate();
-        await sincronizarTablas();
+        //await sincronizarTablas();
         app.listen(process.env.PORT, () => {
             console.log(`*** Servidor en http://${process.env.HOST}:${process.env.PORT} ***`)
         })

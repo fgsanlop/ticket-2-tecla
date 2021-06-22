@@ -13,12 +13,4 @@ const HabilidadBlanda = sequelize.define('habilidades_blandas', {
     },
 }, { timestamps: false });
 
-HabilidadBlanda.findOrCreate({ where: { nombre: 'Enfocado' } });
-HabilidadBlanda.findOrCreate({ where: { nombre: 'Trabajo en equipo' } });
-HabilidadBlanda.findOrCreate({ where: { nombre: 'Comprometido' } });
-HabilidadBlanda.findOrCreate({ where: { nombre: 'Comunicación' } });
-HabilidadBlanda.findOrCreate({ where: { nombre: 'Capacidad de aprendizaje' } });
-HabilidadBlanda.findOrCreate({ where: { nombre: 'Resolución de problemas' } });
-
-
 module.exports = HabilidadBlanda;

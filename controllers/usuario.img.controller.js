@@ -6,7 +6,6 @@ let UsuarioModel = require('../models/usuario.model');
 const subirImagenUsuario = async (req, res) => {        
     try {
         if(req.files){
-
             const token = req.headers.authorization.split(' ')[1];
             const datos = await middJwt.decodificarToken(token);
             let idUsuario = datos.id;        
@@ -30,7 +29,6 @@ const subirImagenUsuario = async (req, res) => {
                     });
                 } 
                 await UsuarioModel.actualizarImagen(idUsuario, nombreArchivo);
-                //res.status(200).json({ruta: rutaArchivo, imagen: nombreArchivo, extension: extension})
                 res.status(200).json('Imagen actualizada')
             }                               
             else{

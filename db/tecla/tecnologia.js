@@ -13,9 +13,4 @@ const Tecnologia = sequelize.define('tecnologias', {
     },
 }, { timestamps: false });
 
-Tecnologia.findOrCreate({ where: { nombre: 'Node.js' } });
-Tecnologia.findOrCreate({ where: { nombre: 'Frontend' } });
-Tecnologia.findOrCreate({ where: { nombre: 'Swagger' } });
-Tecnologia.findOrCreate({ where: { nombre: 'Javascript' } });
-
 module.exports = Tecnologia;

@@ -58,21 +58,4 @@ const Usuario = sequelize.define('usuarios', {
     },
 });
 
-Usuario.findOrCreate({
-    where: {
-        nombre_usuario: 'aeolguin',
-        pass: 'pirulo',
-        imagen_perfil: 'aeolguin.png',
-        nombres: 'Ariel',
-        apellidos: 'Olguin',
-        pais: 'Argentina',
-        ciudad: 'Buenos Aires',
-        fecha_nacimiento: '1980-01-01',
-        linkedin: 'https://www.linkedin.com/in/ariel-olguin-83093316/',
-        github: 'https://github.com/aeolguin',
-        es_tutor: true   
-    }
-});
-
-
 module.exports = Usuario;

@@ -17,7 +17,7 @@ router.post('/registro', middJwt.checarToken, middValidUsuarioDatosAdicionales.i
     }
 });
 
-router.put('/actualizar/:idIdioma', middJwt.checarToken, middValidUsuarioDatosAdicionales.idioma, async (req,res) => {    
+router.put('/actualizar/:idIdioma', middJwt.checarToken, middValidUsuarioDatosAdicionales.idioma,    async (req,res) => {    
     const body = req.body;
     const token = req.headers.authorization.split(' ')[1];                
     try {

@@ -13,10 +13,6 @@ const Conocimiento = sequelize.define('conocimientos', {
     },
 }, { timestamps: false });
 
-Conocimiento.findOrCreate({ where: { nombre: 'Base de datos' } });
-Conocimiento.findOrCreate({ where: { nombre: 'APIS' } });
-Conocimiento.findOrCreate({ where: { nombre: 'Testing' } });
-Conocimiento.findOrCreate({ where: { nombre: 'Seguridad' } });
-Conocimiento.findOrCreate({ where: { nombre: 'Teoría de objetos' } });
+
 
 module.exports = Conocimiento;
